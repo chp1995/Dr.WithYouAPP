@@ -15,6 +15,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".UserLogin"
+            android:label="登陆" >
+        </activity>
+
+        <activity
+            android:name=".UserRegister"
+            android:label="注册" >
+        </activity>
     </application>
 
 </manifest>

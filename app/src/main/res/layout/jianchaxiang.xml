@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="0.17">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <TextView
+                android:text="检测时间："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shijianQ1"
+                android:layout_weight="0.09" />
+
+            <TextView
+                android:text="早六时"
+                android:layout_width="99dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/shijianA1"
+                android:layout_weight="0.01" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="血糖含量："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/xiangmuA1" />
+
+            <EditText
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editText1" />
+
+            <TextView
+                android:text="mmol/L"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/xiangmuC1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="说明：每日晨起后空腹测量"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shuoming1"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rowCount="1"
+            android:columnCount="3">
+
+            <Button
+                android:text="提交"
+                android:layout_width="166dp"
+                android:layout_height="34dp"
+                android:id="@+id/tijiao1" />
+        </GridLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="0.17">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <TextView
+                android:text="检测时间："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shijianQ2"
+                android:layout_weight="0.09" />
+
+            <TextView
+                android:text="早六时"
+                android:layout_width="99dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/shijianA2"
+                android:layout_weight="0.01" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="血糖含量："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/xiangmuA2" />
+
+            <EditText
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editText2" />
+
+            <TextView
+                android:text="mmol/L"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/xiangmuC2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="说明：每日晨起后空腹测量"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shuoming2"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rowCount="1"
+            android:columnCount="3">
+
+            <Button
+                android:text="提交"
+                android:layout_width="166dp"
+                android:layout_height="34dp"
+                android:id="@+id/tijiao2" />
+        </GridLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="0.17">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <TextView
+                android:text="检测时间："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shijianQ3"
+                android:layout_weight="0.09" />
+
+            <TextView
+                android:text="早六时"
+                android:layout_width="99dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/shijianA3"
+                android:layout_weight="0.01" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="血糖含量："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/xiangmuA3" />
+
+            <EditText
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editText3" />
+
+            <TextView
+                android:text="mmol/L"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/xiangmuC3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="说明：每日晨起后空腹测量"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shuoming3"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rowCount="1"
+            android:columnCount="3">
+
+            <Button
+                android:text="提交"
+                android:layout_width="166dp"
+                android:layout_height="34dp"
+                android:id="@+id/tijiao3" />
+        </GridLayout>
+
+    </LinearLayout>
+</LinearLayout>
