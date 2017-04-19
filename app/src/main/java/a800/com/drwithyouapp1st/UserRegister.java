@@ -11,6 +11,9 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +34,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -40,6 +45,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class UserRegister extends Activity {
+
     private EditText register_username;
     private EditText register_passwd;
     private EditText reregister_passwd;
@@ -101,6 +107,7 @@ public class UserRegister extends Activity {
 
             @Override
             public void onClick(View v) {
+
 
                 if (!checkEdit()) {
                     return;
@@ -169,6 +176,59 @@ public class UserRegister extends Activity {
         }
         return null;
     }
+
+                if(!checkEdit()){
+                    return;
+                }
+                // TODO Auto-generated method stub
+                String httpUrl="http:// 43.247.68.17:3306/SRegister?";
+                HttpPost httpRequest=new HttpPost(httpUrl);
+                List<NameValuePair> params=new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("username",register_username.getText().toString().trim()));
+                params.add(new BasicNameValuePair("password",register_passwd.getText().toString().trim()));
+                HttpEntity httpentity = null;
+                try {
+                    httpentity = new UrlEncodedFormEntity(params,"utf8");
+                } catch (UnsupportedEncodingException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                httpRequest.setEntity(httpentity);
+                HttpClient httpclient=new DefaultHttpClient();
+                HttpResponse httpResponse = null;
+                try {
+                    httpResponse = httpclient.execute(httpRequest);
+                } catch (ClientProtocolException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                if(httpResponse.getStatusLine().getStatusCode()==200)
+                {
+                    String strResult = null;
+                    try {
+                        strResult = EntityUtils.toString(httpResponse.getEntity());
+                    } catch (ParseException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(UserRegister.this, strResult, Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(UserRegister.this, "请求错误", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+        });
+    }
+
     private boolean checkEdit(){
         if(register_username.getText().toString().trim().equals("")){
             Toast.makeText(UserRegister.this, "用户名不能为空", Toast.LENGTH_SHORT).show();
