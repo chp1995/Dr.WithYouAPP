@@ -2,7 +2,15 @@ package a800.com.drwithyouapp1st;
 
 /**
  * Created by lenovo on 2017/4/12.
+ * easypoon
  */
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -22,6 +30,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -94,6 +107,75 @@ public class UserRegister extends Activity {
 
             @Override
             public void onClick(View v) {
+
+
+                if (!checkEdit()) {
+                    return;
+                }else{
+                    sendRequestWithHttpClient();
+                }
+            }
+        });
+    }
+    //跳转
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Intent tent=new Intent();
+            tent.setClass(UserRegister.this,MainActivity.class);
+            startActivity(tent);
+        }
+    };
+    //开辟新线程
+    private void sendRequestWithHttpClient() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String httpUrl = "http://139.199.5.64/Slogin.php?";
+                    httpUrl += "name=" + register_username.getText().toString() + "&password=" + register_passwd.getText().toString();
+                    String str = getJsonByInternet(httpUrl);
+                    String flag = str.split(" ")[1];
+                    if (flag.equals("true")) {
+                        Message message = new Message();
+                        handler.sendMessage(message);
+                    } else {
+                        Toast.makeText(UserRegister.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+
+                    }
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();//这个start()方法不要忘记了
+    }
+    //传入url 接收返回数据
+    public static String getJsonByInternet(String path){
+        //使用httpURLconnention 进行连接
+        try {
+            URL url = new URL(path.trim());
+            //打开连接
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            if(200 == urlConnection.getResponseCode()){
+                //得到输入流
+                InputStream is =urlConnection.getInputStream();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024];
+                int len = 0;
+                while(-1 != (len = is.read(buffer))){
+                    baos.write(buffer,0,len);
+                    baos.flush();
+                }
+                return baos.toString("utf-8");
+            }
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
                 if(!checkEdit()){
                     return;
