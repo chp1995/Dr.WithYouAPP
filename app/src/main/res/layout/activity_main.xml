@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="欢迎来到“你是病人”客户端，由于我只做了后台，不好看见谅"
+        android:text="欢迎来到“你是病人”客户端"
         android:id="@+id/textView" />
 
     <Button

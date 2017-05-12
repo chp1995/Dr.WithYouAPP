@@ -5,27 +5,6 @@ package a800.com.drwithyouapp1st;
  * easypoon
  */
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,6 +17,14 @@ import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class UserRegister extends Activity {
     private EditText register_username;
@@ -116,7 +103,7 @@ public class UserRegister extends Activity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Intent tent=new Intent();
-            tent.setClass(UserRegister.this,MainActivity.class);
+            tent.setClass(UserRegister.this,UserLogin.class);
             startActivity(tent);
         }
     };
@@ -126,15 +113,24 @@ public class UserRegister extends Activity {
             @Override
             public void run() {
                 try {
-                    String httpUrl = "http://139.199.5.64/Slogin.php?";
-                    httpUrl += "name=" + register_username.getText().toString() + "&password=" + register_passwd.getText().toString();
-                    String str = getJsonByInternet(httpUrl);
-                    String flag = str.split(" ")[1];
-                    if (flag.equals("true")) {
+//                    String httpUrl = "http://139.199.5.64/Slogin.php?";
+//                    httpUrl += "name=" + register_username.getText().toString() + "&password=" + register_passwd.getText().toString();
+                    //String str = getJsonByInternet(httpUrl);
+                    //大改啊啊
+                    String md5passwd= MD5.encode(register_passwd.getText().toString());
+//                    String passwd="&password="+md5passwd;
+//                    String usname="username="+register_username.getText().toString();
+                    String str= RegisterLoginUtils.RegistByPost(register_username.getText().toString(),md5passwd);
+//                    String str= LoginPostUtils.LoginByPost(register_username.getText().toString(), register_passwd.getText().toString());
+                    String newstr=StringUtil.Decode(str);
+                    //String flag = str.split(" ")[1];
+                    JSONObject  jsonObject=new JSONObject(newstr);
+                    String result=jsonObject.getString("result");
+                    if (result.equals("true")) {
                         Message message = new Message();
                         handler.sendMessage(message);
                     } else {
-                        Toast.makeText(UserRegister.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserRegister.this, jsonObject.getString("errormsg"), Toast.LENGTH_SHORT).show();
 
                     }
                 } catch (Exception e) {
