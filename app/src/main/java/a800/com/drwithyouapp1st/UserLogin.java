@@ -4,21 +4,19 @@ package a800.com.drwithyouapp1st;
  * Created by lenovo on 2017/4/12.
  */
 
-<<<<<<< HEAD
-=======
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.StrictMode;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -31,34 +29,16 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-
->>>>>>> origin/develop
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-
-import android.os.Handler;
-import android.os.Message;
-
-import android.os.StrictMode;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserLogin extends Activity implements OnClickListener {
     private EditText login_username;
