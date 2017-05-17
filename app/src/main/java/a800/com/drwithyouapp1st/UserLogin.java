@@ -5,18 +5,18 @@ package a800.com.drwithyouapp1st;
  */
 
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.StrictMode;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -29,31 +29,23 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
-
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-
-import android.os.Handler;
-import android.os.Message;
-
-import android.os.StrictMode;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserLogin extends Activity implements OnClickListener {
     private EditText login_username;
     private EditText login_password;
     private Button user_login_button;
     private Button user_register_button;
+    public String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +139,8 @@ public class UserLogin extends Activity implements OnClickListener {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Intent tent=new Intent();
-            tent.setClass(UserLogin.this,MainActivity.class);
+            tent.setClass(UserLogin.this,CenterActivity.class);
+            tent.putExtra("key",token);
             startActivity(tent);
         }
     };
@@ -157,13 +150,22 @@ public class UserLogin extends Activity implements OnClickListener {
             @Override
             public void run() {
                 try {
-                    String httpUrl = "http://139.199.5.64/Slogin.php?";
-                    httpUrl += "name=" + login_username.getText().toString() + "&password=" + login_password.getText().toString();
-                    String str = getJsonByInternet(httpUrl);
-                        String flag = str.split(" ")[1];
-                        if (flag.equals("true")) {
+//                    String httpUrl = "http://139.199.5.64/Slogin.php?";
+//                    httpUrl += "name=" + login_username.getText().toString() + "&password=" + login_password.getText().toString();
+                   //String str = getJsonByInternet(httpUrl);
+                    //大改啊啊
+                    String passwd=login_password.getText().toString();
+                    String md5passwd= MD5.encode(passwd);
+                    String usname=login_username.getText().toString();
+                    String str= LoginPostUtils.LoginByPost(usname,md5passwd);
+                    //
+                    String newstr=StringUtil.Decode(str);
+                    JSONObject jsonObject=new JSONObject(newstr);
+                    String result=jsonObject.getString("result");
+                        if (result.equals("true")) {
                             Message message = new Message();
                             handler.sendMessage(message);
+                            token = jsonObject.getString("token");
                         } else {
                             Toast.makeText(UserLogin.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
 
